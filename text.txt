@@ -1,0 +1,4 @@
+/*
+DB URL = mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.j7t5o8c.mongodb.net/<DB_COLLECTION_NAME>?retryWrites=true&w=majority&appName=Cluster0
+FOR RANDOM BYTES =  node   ->   require("crypto").randomBytes(128).toString('hex')
+*/
