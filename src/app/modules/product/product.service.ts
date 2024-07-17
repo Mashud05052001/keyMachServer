@@ -12,7 +12,7 @@ const createProductIntoDB = async (payload: TProduct) => {
 };
 
 const getProductsCountFromDB = async () => {
-  const result = await Product.countDocuments();
+  const result = await Product.countDocuments({ isDeleted: false });
   return result;
 };
 

@@ -10,7 +10,11 @@ const port = config.port || 5000;
 
 // parser
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:5173'] }));
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://key-mach.vercel.app'],
+  }),
+);
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
