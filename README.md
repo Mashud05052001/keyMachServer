@@ -39,7 +39,7 @@ npm install
 - Setup Environment Variables
 
 ``` bash
-NODE_ENV= "developmenr" or "production"
+NODE_ENV= "development" or "production"
 PORT= your_port
 DATABASE_URL= your_database_url
 
