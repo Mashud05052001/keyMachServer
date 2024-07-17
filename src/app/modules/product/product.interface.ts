@@ -25,3 +25,8 @@ export type TProduct = {
   brand: TKeyboardBrand;
   isDeleted?: boolean;
 };
+
+export type TUpdateProps = {
+  _id: string;
+  quantity: [];
+};

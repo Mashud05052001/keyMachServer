@@ -12,8 +12,9 @@ router.post(
   ProductController.createProduct,
 );
 router.get('/', ProductController.getAllProducts);
-router.get('/search', ProductController.getProductsForSearchBox);
 router.get('/:id', ProductController.getSingleProduct);
+router.get('/productsCount/count', ProductController.getProductsCount);
+router.get('/search', ProductController.getProductsForSearchBox);
 
 router.patch(
   '/:id',
@@ -21,5 +22,10 @@ router.patch(
   ProductController.updateProduct,
 );
 router.delete('/:id', ProductController.deleteProduct);
+router.put(
+  '/',
+  validateRequest(ProductValidation.updateQuantityArrayValidationSchema),
+  ProductController.updateProductQuantityWhileOrdering,
+);
 
 export const ProductRoutes = router;

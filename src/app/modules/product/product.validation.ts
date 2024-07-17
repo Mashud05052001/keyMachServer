@@ -97,7 +97,27 @@ const updateProductValidationSchema = z.object({
   }),
 });
 
+const updateQuantityObjectValidationSchema = z.object({
+  _id: z.string({
+    required_error: `Products ID's must be required`,
+    invalid_type_error: `Product ID's are must be in string`,
+  }),
+  quantity: z
+    .number({
+      required_error: `Products quantities must be required`,
+      invalid_type_error: `Product quantity are must be in string`,
+    })
+    .positive({ message: 'Product quantity cannot be a negative number' }),
+});
+
+const updateQuantityArrayValidationSchema = z.object({
+  body: z.array(updateQuantityObjectValidationSchema, {
+    required_error: 'Data must be required',
+  }),
+});
+
 export const ProductValidation = {
   createProductValidationSchema,
   updateProductValidationSchema,
+  updateQuantityArrayValidationSchema,
 };

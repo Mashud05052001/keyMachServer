@@ -26,6 +26,16 @@ const getAllProducts = catchAsync(async (req, res, next) => {
   });
 });
 
+const getProductsCount = catchAsync(async (req, res, next) => {
+  const result = await ProductService.getProductsCountFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Total products count successfully retrived',
+    data: result,
+  });
+});
+
 const getProductsForSearchBox = catchAsync(async (req, res, next) => {
   const query = req?.query;
   const result = await ProductService.getProductsForSearchBoxFromDB(query);
@@ -71,11 +81,28 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   });
 });
 
+const updateProductQuantityWhileOrdering = catchAsync(
+  async (req, res, next) => {
+    const data = req.body;
+    console.log(data);
+    const result =
+      await ProductService.updateProductQuantityWhileOrderingIntoDB(data);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Product quantity updated successfully',
+      data: result,
+    });
+  },
+);
+
 export const ProductController = {
   createProduct,
+  getProductsCount,
   getAllProducts,
   getProductsForSearchBox,
   getSingleProduct,
   updateProduct,
   deleteProduct,
+  updateProductQuantityWhileOrdering,
 };

@@ -3,11 +3,16 @@ import {
   excludedProductQueryField,
   productSearchableFields,
 } from './product.constant';
-import { TProduct } from './product.interface';
+import { TProduct, TUpdateProps } from './product.interface';
 import { Product } from './product.model';
 
 const createProductIntoDB = async (payload: TProduct) => {
   const result = await Product.create(payload);
+  return result;
+};
+
+const getProductsCountFromDB = async () => {
+  const result = await Product.countDocuments();
   return result;
 };
 
@@ -22,7 +27,9 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
     .paginate(1, 10)
     .sort();
   const result = await productQuery.modelQuery;
+  // const noOfTotalProducts = await Product.countDocuments();
   // console.log(result.length, query);
+  // return { noOfTotalProducts, data: result };
   return result;
 };
 
@@ -60,11 +67,31 @@ const deleteProductFromDB = async (id: string) => {
   return null;
 };
 
+const updateProductQuantityWhileOrderingIntoDB = async (
+  payload: TUpdateProps[],
+) => {
+  try {
+    await Promise.all(
+      payload.map(async (item) => {
+        return await Product.findByIdAndUpdate(item._id, {
+          $inc: { quantity: -item.quantity },
+        });
+      }),
+    );
+    return 'Successfully updated data';
+  } catch (error) {
+    console.error('Error updating products:', error);
+    throw error;
+  }
+};
+
 export const ProductService = {
   createProductIntoDB,
+  getProductsCountFromDB,
   getAllProductsFromDB,
   getProductsForSearchBoxFromDB,
   getSingleProductFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  updateProductQuantityWhileOrderingIntoDB,
 };
