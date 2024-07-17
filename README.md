@@ -4,7 +4,7 @@ Welcome to the KeyMach backend repository, the server side of our premium keyboa
 
 ## Live URL
 
-Backend URL i [KeyMach_Backend_URL](https://keymach.vercel.app/)
+Backend URL [KeyMach_Backend_URL](https://keymach.vercel.app/)
 
 ## Features
 
